@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{tikz} % for drawing stuff
+\usepackage{xcolor} % for \textcolor{}
+\usepackage{readarray} % for \getargsC{}
+\usepackage{graphicx} % disjoint union
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+
+% Math sets
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+
+% Setup of project
+\newenvironment{question}[2][Question]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{answer}[2][Answer]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2:}]}{\end{trivlist}}
+\begin{document}
+% math enumerate
+\renewcommand{\theenumi}{\roman{enumi}}
+
+% Short hands
+\let\oldsum\sum
+\renewcommand{\sum}[3]{\oldsum\limits_{#1}^{#2}#3}
+\let\oldprod\prod
+\renewcommand{\prod}[3]{\oldprod\limits_{#1}^{#2}#3}
+
+
+\title{Homework 1}
+\author{Haukur Páll Jónsson\\
+NLP 2017}
+
+\maketitle
+
+\begin{question}{1}
+\emph{Their} vs \emph{There}
+\end{question}
+\begin{answer}{a)}{Unigram model}
+
+The probability of a sentence, $w_1,w_2,...,w_n$ is given by:
+$$p(w_1,w_2,...,w_n)=\displaystyle \prod{i=1}{n}{p(w_i|w_1^{i-1})}$$
+In the unigram model we assume $p(w_i|w_1^{i-1})=p(w_i)$, i.e. we assume that words are independent of each other. Therefore,
+$$p(w_1,w_2,...,w_n)=\displaystyle \prod{i=1}{n}{p(w_i)}$$
+
+The approach to attempt to solve the \emph{their} vs \emph{there} in terms of a unigram model is a bad idea for the following reason. When evaluating a probability of a sentence; $p(w_1,w_2,...,w_n)$  which contains either \emph{their} or \emph{there} and we want to see which sentence is more likely, we compare their probabilities and choose the one with higher probability. Namely:
+$$ arg max_{their, there} \{p(w_1,w_2,...,w_{n-1})*p(their), p(w_1,w_2,...,w_{n-1})*p(there) \}=arg max_{their, there}\{p(their), p(there) \}$$
+That is, we always pick the word (out of there/their) which has higher probability. That is, the more occurring word will always be considered the "correct" word.
+\end{answer}
+
+\begin{answer}{b)}{Bigram model}
+
+When using a bigram we assume; $p(w_i|w_1^{i-1})=p(w_i|w_{i-1})$, that is, the probability of a word depends on the preceding word. Thus, the formula is:
+$$p(w_1,w_2,...,w_n)=\displaystyle \prod{i=1}{n}{p(w_i|w_{i-1})}$$
+
+The bigram model would do a lot better as it can account for the fact that a noun is more frequently preceded by \emph{their}, rather than \emph{there}. Similarly, a verb is more frequently preceded by \emph{there}, rather than \emph{their}. The language model does not know what a "noun" or a "verb" is, but it knows the probability over all words preceding \emph{their} and \emph{there}, which will have this structure.
+\end{answer}
+
+\begin{question}{2}
+Independence assumption
+\end{question}
+
+\begin{answer}{a)}
+The strange man
+\end{answer}
+
+\begin{answer}{b)}
+\end{answer}
+
+\begin{answer}{c)}
+\end{answer}
+
+\begin{question}{3}
+Hidden Markov Model and Named Entity Recognition
+\end{question}
+
+\begin{answer}{a)}{Transition matrix}
+
+The matrix is represented s.t. we go from row to column, therefore if we sum up the probabilities of a row we get 1.
+\begin{table}[h!]
+\centering
+\caption{Transition matrix}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+      & Per           & Org             & end            \\ \hline
+start & $\frac{3}{4}$ & $\frac{1}{4}$   & 0              \\ \hline
+Per   & $\frac{3}{6}$ & $\frac{3}{6}$   & 0              \\ \hline
+Org   & 0             & $\frac{11}{15}$ & $\frac{4}{15}$ \\ \hline
+\end{tabular}
+\end{table}
+\end{answer}
+
+\begin{answer}{b)}
+\end{answer}
+
+\begin{answer}{c)}
+\end{answer}
+
+\begin{answer}{d)}
+\end{answer}
+\end{document}
