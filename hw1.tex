@@ -66,13 +66,8 @@ Independence assumption
 \end{question}
 
 \begin{answer}{a)}
-The strange man
-\end{answer}
 
-\begin{answer}{b)}
-\end{answer}
-
-\begin{answer}{c)}
+Consider these sentences as examples of when the independence assumption is broken. "Easier said than done.", "I wish you a merry Christmas." and "Two plus two is four.". In all of these sentences, any deviation from the last word would be highly improbable. We need to consider these phrases as a complete sentences.
 \end{answer}
 
 \begin{question}{3}
@@ -81,27 +76,34 @@ Hidden Markov Model and Named Entity Recognition
 
 \begin{answer}{a)}{Transition matrix}
 
-The matrix is represented s.t. we go from row to column, therefore if we sum up the probabilities of a row we get 1.
+The matrix is represented s.t. we go from column to row, that is, if we sum up the probabilities of a column we get 1.
 \begin{table}[h!]
 \centering
-\caption{Transition matrix}
+\caption{Transition Matrix}
 \label{my-label}
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|l|}
 \hline
-      & Per           & Org             & end            \\ \hline
-start & $\frac{3}{4}$ & $\frac{1}{4}$   & 0              \\ \hline
-Per   & $\frac{3}{6}$ & $\frac{3}{6}$   & 0              \\ \hline
-Org   & 0             & $\frac{11}{15}$ & $\frac{4}{15}$ \\ \hline
+       & $<s>$ & PER & ORG   & OTH   \\ \hline
+$</s>$ & 0     & 0   & 0     & 0.056 \\ \hline
+PER    & 0.4   & 0.5 & 0     & 0.011 \\ \hline
+ORG    & 0     & 0   & 0.563 & 0.080 \\ \hline
+OTH    & 0.6   & 0.5 & 0.437 & 0.853 \\ \hline
 \end{tabular}
 \end{table}
 \end{answer}
 
 \begin{answer}{b)}
+
+$p(Obama|PER)$ with add-1 smoothing is 0.0547945. $p(Obama|Org)$ with add-1 smoothing is 0.012048.
 \end{answer}
 
 \begin{answer}{c)}
+
+Consider the sentence "He's going to Columbia next month.". This sentence could mean that a person is going to the University of Columbia, an organization, or that a person is going to the country Columbia, a location. A text-context might not be enough to disambiguate this sentence as the only way to disambiguate might be to know who "he" is and if "he" is more probable to be going to a university or a country.
 \end{answer}
 
 \begin{answer}{d)}
+
+A precompiled list of common domain or application dependent names could be a valuable information and improve the accuracy of the NER system. This would help in cases where the context does not have enough information to disambiguate between LOC and ORG. From the text given, consider "Chicago". In the text this is a LOC but the word could very will be substituted by an ORG and still be a meaningful sentence. Knowing a priori that "Chicago" is most commonly a LOC could improve accuracy.
 \end{answer}
 \end{document}
