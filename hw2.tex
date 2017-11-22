@@ -68,28 +68,29 @@ PCFGs and the CYK algorithm
 
 For any given parse, we compute the probability of that parse by; $p(rule)*p(element\, of \, rule)*p(element \, of \, rule)$
 Lets start with the cell marked B: \\
-$VP \to V \, Obj \, Obj$, we get: 0.3*0.6*0.2*0.175=0.0063 \\
-$VP \to V \, Obj$, we get: 0.5*0.6*0.175=0.0525 \\
+$VP \to V \, Obj \, Obj$, we get: 0.3*0.6*0.2*0.2=0.0072 \\
+$VP \to V \, Obj$, we get: 0.5*0.6*0.2=0.06 \\
 $VP \to V \, small$, we get: 0.2*0.6*0.08=0.0096 \\
+As we have three rules representing $VP$ we select the one which has the highest probability as the representatitve, namely $VP \to V \, Obj$.
 
-For the cell marked A we essentially get all of the probabilities of B times 0.3: \\
-$S \to Subj \, VP$, we get: 1.0*0.3*0.0063=0,00189 \\
-$S \to Subj \, VP$, we get: 1.0*0.3*0.0525=0,01575 \\
-$S \to Subj \, VP$, we get: 1.0*0.3*0.0096=0.00288 \\
+For the cell marked A we essentially get the probabilities of B times 0.3: \\
+%($S \to Subj \, VP$, we get: 1.0*0.3*0.0072=0,00216) \\
+$S \to Subj \, VP$, we get: 1.0*0.3*0.06=0,018 \\
+%($S \to Subj \, VP$, we get: 1.0*0.3*0.0096=0.00288) \\
 
-%\begin{table}[]
-%\centering
-%\caption{My caption}
-%\label{my-label}
-%\begin{tabular}{|l|l|l|l|l|}
-%\hline
+% \begin{table}[]
+% \centering
+% \caption{My caption}
+% \label{my-label}
+% \begin{tabular}{|l|l|l|l|l|}
+% \hline
 %     & I                 & make              & her                                                                                    & duck                                                                                                                                                                                                              \\ \hline
-%I    & $Subj \to I$, 0.3 & -                 & \begin{tabular}[c]{@{}l@{}}$S \to Subj VP$,\\   1.0*0.3*0.06\end{tabular}              & \begin{tabular}[c]{@{}l@{}}$S \to Subj VP$,\\   1.0*0.3*0.0063=0,00189\\ $S \to Subj VP$,\\   1.0*0.3*0.0525=0,01575\\ $S \to Subj VP$,\\   1.0*0.3*0.0096=0.00288\end{tabular}                                   \\ \hline
-%make &                   & $V \to make$, 0.6 & \begin{tabular}[c]{@{}l@{}}$VP \to V \medskip Obj$, \\   0.5*0.6*0.2=0.06\end{tabular} & \begin{tabular}[c]{@{}l@{}}$VP \ to V Obj Obj$, \\   0.3*0.6*0.2*0.175=0.0063\\ $VP \to V Obj$,\\   0.5*0.6*0.175=0.0525\\ $VP \to V small$,\\   0.2*0.6*0.08=0.0096\end{tabular}                                 \\ \hline
-%her  &                   &                   & \begin{tabular}[c]{@{}l@{}}$Obj \to her$, 0.2\\ $Det \to her$, 1.0\end{tabular}        & \begin{tabular}[c]{@{}l@{}}$small \to Obj \medskip V$, \\   1.0*0.2*0.4=0.08\\ $NP \to Det \medskip N$, \\   0.5*1.0*0.5=0.25\\ $Subj \to NP$, \\   0.8*0.25=0.2\\ $Obj \to NP$, \\   0.7*0.25=0.175\end{tabular} \\ \hline
-%duck &                   &                   &                                                                                        & \begin{tabular}[c]{@{}l@{}}$V \to duck$, 0.4\\ $N \to duck$, 0.5\\ $NP \to N$, 0.5*0.5=0.25\\ $Subj \to NP$, 0.8*0.25=0.2\\ $Obj \to NP$, 0.7*0.25=0.175\end{tabular}                                             \\ \hline
-%\end{tabular}
-%\end{table}
+% I    & $Subj \to I$, 0.3 & -                 & \begin{tabular}[c]{@{}l@{}}$S \to Subj VP$,\\   1.0*0.3*0.06\end{tabular}              & \begin{tabular}[c]{@{}l@{}}$S \to Subj VP$,\\   1.0*0.3*0.0072=0,00216\\ $S \to Subj VP$,\\   1.0*0.3*0.06=0,018\\ $S \to Subj VP$,\\   1.0*0.3*0.0096=0.00288\end{tabular}                                   \\ \hline
+% make &                   & $V \to make$, 0.6 & \begin{tabular}[c]{@{}l@{}}$VP \to V \medskip Obj$, \\   0.5*0.6*0.2=0.06\end{tabular} & \begin{tabular}[c]{@{}l@{}}$VP \ to V Obj Obj$, \\   0.3*0.6*0.2*0.2=0.0072\\ $VP \to V Obj$,\\   0.5*0.6*0.2=0.06\\ $VP \to V small$,\\   0.2*0.6*0.08=0.0096\end{tabular}                                 \\ \hline
+% her  &                   &                   & \begin{tabular}[c]{@{}l@{}}$Obj \to her$, 0.2\\ $Det \to her$, 1.0\end{tabular}        & \begin{tabular}[c]{@{}l@{}}$small \to Obj \medskip V$, \\   1.0*0.2*0.4=0.08\\ $NP \to Det \medskip N$, \\   0.5*1.0*0.5=0.25\\ $Subj \to NP$, \\   0.7*0.25=0.175\\ $Obj \to NP$, \\   0.8*0.25=0.2\end{tabular} \\ \hline
+% duck &                   &                   &                                                                                        & \begin{tabular}[c]{@{}l@{}}$V \to duck$, 0.4\\ $N \to duck$, 0.5\\ $NP \to N$, 0.5*0.5=0.25\\ $Subj \to NP$, 0.7*0.25=0.175\\ $Obj \to NP$, 0.8*0.25=0.2\end{tabular}                                             \\ \hline
+% \end{tabular}
+% \end{table}
 \end{answer}
 \begin{answer}{b)}
 
@@ -107,12 +108,22 @@ Dependency parsing /MST
 
 \begin{answer}{a)}{CLE}
 
+I denote each node as the first letter in the corresponding word, $John=j$, $likes=l$, $plain=p$ and $bagles=b$ and for the root, $root=r$. A directed edge from $i$ to $j$ is denoted by $(i,j)$. An edge with weight $k$ is denoted by $w((i,j))=k$.
 
+After applying the first step of the algorithm we are left with the edges:\\
+$E=\{(l,j),(p,l),(b,p),(l,b)\}$ \\
+And corresonding weights: \\
+$w((l,j))=20$, $w((p,l))=20$, $w((b,p))=15$, $w((l,b))=30$ \\
+There is clearly three node a circle: $C=\{(p,l),(l,b),(b,p)\}$
 \end{answer}
 
 \begin{answer}{b)}{Final step}
 
-
+The final result is: \\
+$E=\{(r,l),(l,j),(l,b),(b,p)\}$ \\
+And corresonding weights: \\
+$w((r,l))=15$, $w((l,j))=20$, $w((l,b))=30$, $w((b,p))=15$ \\
+Total span is 80.
 \end{answer}
 
 \begin{question}{4}
@@ -122,5 +133,27 @@ Dependency parsing / Transistion based
 \begin{answer}{a)}{Arc-standard system}
 
 
+\begin{table}[h!]
+\centering
+\caption{Configurations}
+\label{my-label}
+\begin{tabular}{|l|l|l|l|}
+\hline
+Transition       & Stack                       & Buffer                             & Arcs                                                                                                                                          \\ \hline
+/                & {[}root{]}                  & {[}A koala eats leafs and barks{]} & $\emptyset=A$                                                                                                                                   \\ \hline
+SHIFT            & {[}root A{]}                & {[}koala eats leafs and barks{]}   & $A$                                                                                                                                   \\ \hline
+SHIFT            & {[}root A koala{]}          & {[}eats leafs and barks{]}         & $A$                                                                                                                                   \\ \hline
+LEFT-ARC (det)   & {[}root koala{]}            & {[}eats leafs and barks{]}         & $A \cup\{koala \to A\}$                                                                                                                             \\ \hline
+SHIFT            & {[}root koala eats{]}       & {[}leafs and barks{]}              & $A$                                                                                                                             \\ \hline
+LEFT-ARC (nsubj) & {[}root eats{]}             & {[}leafs and barks{]}              & $A \cup\{eats \to koala\}$                                                                                                             \\ \hline
+SHIFT            & {[}root eats leafs{]}       & {[}and barks{]}                    & $A$                                                                                                             \\ \hline
+SHIFT            & {[}root eats leafs and{]}   & {[}barks{]}                        & $A$                                                                                                             \\ \hline
+RIGHT-ARC (cc)   & {[}root eats leafs{]}       & {[}barks{]}                        & $A \cup\{leafs \to and\}$                                                                                              \\ \hline
+SHIFT            & {[}root eats leafs barks{]} & {[}{]}                             & $A$                                                                                              \\ \hline
+RIGHT-ARC (conj) & {[}root eats leafs{]}       & {[}{]}                             & $A \cup\{leafs \to barks\}$                            \\ \hline
+RIGHT-ARC (dobj) & {[}root eats{]}             & {[}{]}                             & $A \cup\{eats \to leafs\}$              \\ \hline
+RIGHT-ARC (root) & {[}root{]}                  & {[}{]}                             & $A \cup\{root \to eats\}$ \\ \hline
+\end{tabular}
+\end{table}
 \end{answer}
 \end{document}
