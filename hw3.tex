@@ -115,15 +115,15 @@ Natural language to first order logic
 
 \begin{answer}{a)}{Juan hates pasta}
 
-$$\exists\, e,x \, hating(e) \land hater(e, Juan) \land hated(e, x) \land pasta(x) $$
+$$\exists\, e,x \, hating(e) \land hater(e, Juan) \land hatee(e, x) \land pasta(x) $$
 \end{answer}
 \begin{answer}{b)}{Some student likes every class}
 
 This sentence is ambigious, it can mean "A single student likes each and every class" or "Each student likes some class but possibly different classes". The first sentence:
 
-$$\exists \, s. \, student(s) \land \forall \, c. \, class(c) \implies likes(s,c)$$
+$$\exists \, s. \, student(s) \land \forall \, c. \, class(c) \implies \exists \, e. \, liking(e) \land liker(e,s) \land likee(e,c)$$
 And the other sentence:
-$$\forall \, s. \, student(s) \implies \exists \, c. \, class(c) \land likes(s,c)$$
+$$\forall \, s. \, student(s) \implies \exists \,e.c. \, class(c) \land liking(e) \land liker(e,s) \land likee(e,c)$$
 \end{answer}
 
 \begin{question}{5}
